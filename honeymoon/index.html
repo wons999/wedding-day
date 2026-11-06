@@ -85,6 +85,27 @@
 .deia-guide .timeline{margin-top:20px}
 .deia-guide .timeline p{margin-top:5px}
 .deia-guide a{overflow-wrap:anywhere}
+.deia-route-picker{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:20px 0}
+.deia-route-picker button{border:1px solid #d7e1d0;border-radius:12px;padding:13px 12px;text-align:left;background:#f7f9f2;color:#315c4c;font:inherit;font-size:13px;font-weight:700;line-height:1.6}
+.deia-route-picker button span{display:block;font-size:11px;font-weight:400;color:#74856e;margin-top:3px}
+.deia-route-picker button[aria-pressed="true"]{background:#315c4c;color:#fff;border-color:#315c4c}
+.deia-route-picker button[aria-pressed="true"] span{color:#d8e5d4}
+.deia-route-picker button:focus-visible{outline:3px solid #9ab49b;outline-offset:3px}
+.deia-route-heading{margin:24px 0 17px}
+.deia-route-heading h4{font-size:17px;margin:0 0 6px}
+.deia-route-heading p{margin:6px 0}
+.deia-route-view{height:450px;width:100%;position:relative;border:1px solid #dae3d3;border-radius:14px;overflow:hidden;background:#edf1e6}
+.deia-route-view iframe{position:relative;width:100%;height:100%;border:0;display:block}
+.deia-map-placeholder{position:absolute;inset:0;z-index:1;display:grid;place-items:center;padding:30px;margin:0;text-align:center;color:#71856b;font-size:13px;background:#edf1e6;pointer-events:none}
+.deia-map-status{font-size:11px!important;color:#788571!important;min-height:18px;margin:9px 0 14px!important}
+.deia-route-actions a:first-child{background:#315c4c;color:#fff;font-weight:700;padding:12px 15px}
+.deia-route-stops{list-style:none!important;padding:0!important;margin:14px 0 22px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.deia-route-stops li{display:flex;gap:11px;margin:0!important;padding:13px;border:1px solid #e2e8db;border-radius:11px;min-width:0}
+.deia-stop-number{display:grid;place-items:center;flex:0 0 27px;height:27px;border-radius:50%;background:#e4eddb;color:#315c4c;font-size:12px;font-weight:800}
+.deia-route-stops strong{display:block;font-size:13px}
+.deia-route-stops small{display:block;font-size:11px;color:#7a8772;margin:3px 0}
+.deia-route-stops a{font-size:11px;text-decoration:none}
+@media(max-width:700px){.deia-route-picker{grid-template-columns:repeat(2,minmax(0,1fr))}.deia-route-picker button{padding:11px 10px;font-size:12px}.deia-route-view{height:390px}.deia-route-stops{grid-template-columns:1fr}.deia-route-heading h4{font-size:16px}}
 @media(max-width:700px){.deia-cover{padding:24px 22px}.deia-cover h2{font-size:29px}.deia-cover h2 span{font-size:43px}.deia-cover .deia-lead{font-size:20px}.deia-facts{gap:9px}.deia-facts b{font-size:16px}.deia-facts span{font-size:10px}.deia-guide .card{padding:23px 21px}.deia-guide .card>h3{font-size:17px}.deia-index{gap:6px}.deia-index a{padding:7px 10px}.deia-guide .timeline li{grid-template-columns:80px 1fr}.deia-table{min-width:480px}.main-tabs button{font-size:13px;padding:12px 6px}}
 
 
@@ -103,10 +124,30 @@ select{font:inherit}.dining-entry{border:1px solid #a6bba8;background:linear-gra
   </header>
 
   <nav class="deia-index" aria-label="데이아 가이드 목차">
-    <a href="#deia-story">마을 이야기</a><a href="#deia-sights">볼거리 6곳</a><a href="#deia-walks">산책 코스</a><a href="#deia-food">식사</a><a href="#deia-transport">주차·교통</a><a href="#deia-november">11월 운영</a><a href="#deia-actions">현장 체크</a>
+    <a href="#deia-routes">Google 경로 지도</a><a href="#deia-story">마을 이야기</a><a href="#deia-sights">볼거리 6곳</a><a href="#deia-walks">산책 코스</a><a href="#deia-food">식사</a><a href="#deia-transport">주차·교통</a><a href="#deia-november">11월 운영</a><a href="#deia-actions">현장 체크</a>
   </nav>
 
   <div class="deia-callout"><strong>먼저 정하면 편해요</strong><p>처음 방문한다면 <b>돌집 골목 → 언덕 위 교회와 전망 → 식사·휴식</b>만으로 충분해요. 문학에 관심이 있으면 그레이브스의 집을 더하고, Cala Deià와 손 마로이그는 날씨가 좋은 날 별도 이동으로 하나만 선택해요.</p></div>
+
+  <section class="card day-guide deia-routes" id="deia-routes" aria-labelledby="deia-routes-heading">
+    <h3 id="deia-routes-heading">지도에서 경로선으로 보기</h3>
+    <p>코스를 누르면 <b>방문 순서대로 연결한 Google 지도 경로</b>가 보여요. 마을 산책은 도보, 손 마로이그·소예르 방향은 차량으로 설정했어요. 다섯 코스 중 원하는 것만 골라요.</p>
+    <div class="deia-route-picker" role="group" aria-label="데이아 경로 선택">
+      <button type="button" data-deia-route="village" aria-pressed="true">A · 마을 산책<span>도보 · 기본 코스</span></button>
+      <button type="button" data-deia-route="graves" aria-pressed="false">B · 문학관까지<span>도보 · 평일 선택</span></button>
+      <button type="button" data-deia-route="cove" aria-pressed="false">C · Cala Deià<span>도보 · 해안 선택</span></button>
+      <button type="button" data-deia-route="son-marroig" aria-pressed="false">D · 손 마로이그<span>차량 · 전망 선택</span></button>
+      <button type="button" data-deia-route="soller" aria-pressed="false">E · 소예르 방향<span>차량 · 경유 선택</span></button>
+    </div>
+    <div class="deia-route-heading" aria-live="polite" aria-atomic="true"><h4 id="deia-route-title">중심 골목과 교회 언덕을 한 바퀴</h4><p class="guide-slot" id="deia-route-mode">도보 · 관람·휴식 포함 60~90분 가정</p><p id="deia-route-summary">시청 앞 → Es Clot 골목 → 교회·묘지 → 시청 앞 복귀</p></div>
+    <div class="deia-route-view" id="deia-route-view"><p class="deia-map-placeholder" id="deia-map-placeholder">Google 지도에 선택한 코스의 경로선을 표시해요.</p><iframe id="deia-route-map" title="마을 산책 · Google 지도 경로" loading="lazy" referrerpolicy="no-referrer" allowfullscreen></iframe></div>
+    <p class="deia-map-status" id="deia-map-status" role="status">지도는 인터넷에 연결되어 있을 때 표시돼요.</p>
+    <div class="links deia-route-actions"><a id="deia-route-open" href="https://www.google.com/maps/dir/?api=1&amp;origin=Ajuntament+de+Deia+Mallorca&amp;destination=Ajuntament+de+Deia+Mallorca&amp;waypoints=Museu+Arqueologic+de+Deia+Mallorca%7CEsglesia+Sant+Joan+Baptista+Deia+Mallorca&amp;travelmode=walking" target="_blank" rel="noopener noreferrer">Google 지도에서 경로 열기 ↗</a><a id="deia-route-return" href="https://www.google.com/maps/dir/?api=1" target="_blank" rel="noopener noreferrer" hidden>돌아오는 경로 ↗</a></div>
+    <h4>방문 순서·위치</h4>
+    <ol class="deia-route-stops" id="deia-route-stops"></ol>
+    <div class="note" id="deia-route-note">지도 경로와 현장 통행 표지를 함께 확인하세요.</div>
+    <p class="guide-small">지도 안에서 확대·축소할 수 있어요. 지도가 보이지 않으면 ‘Google 지도에서 경로 열기’를 눌러 앱이나 새 창에서 확인해요. 지도 이동시간은 실시간 계산이며, 적힌 관람 포함 소요는 가정이에요. 도보 경사·계단·공사·사유지 표지는 현장에서 확인하세요.</p>
+  </section>
 
   <section class="card day-guide" id="deia-story">
     <h3>01 · 이 마을을 이해하는 네 가지 이야기</h3>
@@ -174,11 +215,13 @@ select{font:inherit}.dining-entry{border:1px solid #a6bba8;background:linear-gra
     <p class="guide-small">동선과 각 구간 소요는 가정이에요. 지도는 참고용이며 실제 계단·개방 구역·통행 가능 여부를 현장에서 확인하세요.</p>
     <h4>A · 마을만 가볍게, 60~90분</h4>
     <ol class="deia-steps"><li><b>0~20분 · 중심 골목</b><br>메인 도로 주변 돌집 골목을 걸어요. 체력이 좋으면 Es Clot 쪽을 조금 더 둘러봐요.</li><li><b>20~45분 · 교회 언덕</b><br>Sant Joan Baptista 방향으로 천천히 올라가 전망을 봐요. 가파르면 중간에서 돌아와도 좋아요.</li><li><b>45~60분 · 조용한 전망·하산</b><br>묘지가 열려 있으면 짧게 둘러본 뒤 내려와요.</li><li><b>60~90분 · 커피·휴식</b><br>영업 중인 마을 카페나 식당에서 쉬어요. 카페 체류·사진 시간에 따라 전체 길이가 달라져요.</li></ol>
-    <div class="links"><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Deia+Mallorca&amp;destination=Esglesia+Sant+Joan+Baptista+Deia&amp;travelmode=walking" target="_blank" rel="noopener noreferrer">마을 → 교회 도보 지도 ↗</a></div>
+    <div class="links"><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Ajuntament+de+Dei%C3%A0%2C+Carrer+Porxo+4%2C+Dei%C3%A0%2C+Mallorca&amp;destination=Ajuntament+de+Dei%C3%A0%2C+Carrer+Porxo+4%2C+Dei%C3%A0%2C+Mallorca&amp;travelmode=walking&amp;waypoints=Museu+Arqueol%C3%B2gic+de+Dei%C3%A0%2C+Carrer+des+Teix+4%2C+Dei%C3%A0%2C+Mallorca%7CEsgl%C3%A9sia+de+Sant+Joan+Baptista%2C+Dei%C3%A0%2C+Mallorca" target="_blank" rel="noopener noreferrer">A 코스 전체 · Google 경로선 ↗</a></div>
     <h4>B · 평일 문학관까지, 약 3시간</h4>
     <p>중심 골목·교회 60분 → 쉬는 시간 20분 → 문학관까지 이동 10~15분 → 그레이브스의 집 최소 60분 → 마을 복귀와 여유 25~30분. 마지막 입장에 쫓기지 않도록 문학관에는 <b>14:30 이전 도착을 목표</b>로 잡아요. 토·일·공휴일에는 문학관 대신 식사·휴식으로 바꿔요.</p>
+    <div class="links"><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Ajuntament+de+Dei%C3%A0%2C+Carrer+Porxo+4%2C+Dei%C3%A0%2C+Mallorca&amp;destination=Ajuntament+de+Dei%C3%A0%2C+Carrer+Porxo+4%2C+Dei%C3%A0%2C+Mallorca&amp;travelmode=walking&amp;waypoints=Museu+Arqueol%C3%B2gic+de+Dei%C3%A0%2C+Carrer+des+Teix+4%2C+Dei%C3%A0%2C+Mallorca%7CEsgl%C3%A9sia+de+Sant+Joan+Baptista%2C+Dei%C3%A0%2C+Mallorca%7CLa+Casa+de+Robert+Graves%2C+Dei%C3%A0%2C+Mallorca" target="_blank" rel="noopener noreferrer">B 코스 전체 · Google 경로선 ↗</a></div>
     <h4>C · 해안 또는 전망대, 하나만 추가</h4>
     <p><b>걷고 싶으면</b> · Cala Deià 왕복 2~2.5시간을 별도 확보해요.<br><b>운전을 선택하면</b> · 손 마로이그 이동·주차·관람에 60~90분을 별도 확보해요.<br>발데모사까지 함께 보는 날에는 마을 A 코스로 줄이고, 해안과 문학관을 모두 넣지 않는 편이 여유로워요.</p>
+    <div class="links"><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Ajuntament+de+Dei%C3%A0%2C+Carrer+Porxo+4%2C+Dei%C3%A0%2C+Mallorca&amp;destination=Cala+Dei%C3%A0%2C+Mallorca&amp;travelmode=walking" target="_blank" rel="noopener noreferrer">Cala Deià · 도보 경로선 ↗</a><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Ajuntament+de+Dei%C3%A0%2C+Carrer+Porxo+4%2C+Dei%C3%A0%2C+Mallorca&amp;destination=Son+Marroig%2C+Dei%C3%A0%2C+Mallorca&amp;travelmode=driving" target="_blank" rel="noopener noreferrer">손 마로이그 · 차량 경로선 ↗</a></div>
     <div class="note"><b>전날 밤 최종 확인</b> · 날씨와 신발 → 문학관 개관 여부 → 식당 1곳 → 주차·복귀 시각. 비가 오면 언덕·해안 대신 짧은 골목과 실내 식사를 선택해요.</div>
   </section>
 
@@ -237,7 +280,76 @@ select{font:inherit}.dining-entry{border:1px solid #a6bba8;background:linear-gra
     <ol><li>마을 산책 A 코스를 기본으로 정해요.</li><li>문학관을 원하면 평일 운영과 마지막 입장을 확인해요.</li><li>식당 한 곳을 정하고 해안·전망대는 날씨를 보고 선택해요.</li></ol>
     <p class="guide-small">마지막 확인 2026-11-06 · 일정 화면으로 돌아가면 기존 날짜별 계획을 이어서 볼 수 있어요.</p>
   </section>
+  <script id="deia-routes-data" type="application/json">{"updated":"2026-11-06","routes":[{"id":"village","label":"A · 마을 산책","mode":"walking","title":"중심 골목과 교회 언덕을 한 바퀴","duration":"관람·휴식 포함 60~90분 가정","summary":"시청 앞을 기준으로 Es Clot 골목과 교회 언덕을 이어서 걸어요. 교회 옆 묘지는 같은 정류 지점에서 짧게 둘러봐요.","note":"고고학박물관은 Es Clot 골목을 찾기 위한 기준점이에요. 내부 관람은 포함하지 않으며 개관 여부도 별도 확인해요. 지도 경로와 현장 통행 표지를 함께 확인하세요.","stops":[{"name":"데이아 시청 앞","query":"Ajuntament de Deià, Carrer Porxo 4, Deià, Mallorca","tip":"출발 · 마을 중심의 공공 기준점"},{"name":"Es Clot 골목","query":"Museu Arqueològic de Deià, Carrer des Teix 4, Deià, Mallorca","tip":"고고학박물관 주변 골목 · 외관 기준"},{"name":"교회·묘지 전망","query":"Església de Sant Joan Baptista, Deià, Mallorca","tip":"언덕 전망 · 묘지는 교회 옆"},{"name":"시청 앞 복귀","query":"Ajuntament de Deià, Carrer Porxo 4, Deià, Mallorca","tip":"도착 · 영업 중인 카페에서 휴식 선택"}],"embedUrl":"https://www.google.com/maps/embed?origin=mfe&pb=!1m10!4m9!3e2!4m1!2sAjuntament+de+Dei%C3%A0,+Carrer+Porxo+4,+Dei%C3%A0,+Mallorca!4m1!2sMuseu+Arqueol%C3%B2gic+de+Dei%C3%A0,+Carrer+des+Teix+4,+Dei%C3%A0,+Mallorca!4m1!2sEsgl%C3%A9sia+de+Sant+Joan+Baptista,+Dei%C3%A0,+Mallorca!4m1!2sAjuntament+de+Dei%C3%A0,+Carrer+Porxo+4,+Dei%C3%A0,+Mallorca!3m1!1sko!5m1!1sko","mapsUrl":"https://www.google.com/maps/dir/?api=1&origin=Ajuntament+de+Dei%C3%A0%2C+Carrer+Porxo+4%2C+Dei%C3%A0%2C+Mallorca&destination=Ajuntament+de+Dei%C3%A0%2C+Carrer+Porxo+4%2C+Dei%C3%A0%2C+Mallorca&travelmode=walking&waypoints=Museu+Arqueol%C3%B2gic+de+Dei%C3%A0%2C+Carrer+des+Teix+4%2C+Dei%C3%A0%2C+Mallorca%7CEsgl%C3%A9sia+de+Sant+Joan+Baptista%2C+Dei%C3%A0%2C+Mallorca"},{"id":"graves","label":"B · 문학관까지","mode":"walking","title":"마을 산책에 그레이브스의 집 더하기","duration":"관람·휴식 포함 약 3시간 가정","summary":"골목 → 교회·묘지 → 그레이브스의 집 → 마을 복귀 순서예요. 문학관은 묘지와 다른 위치라는 점을 지도에서 확인하세요.","note":"그레이브스의 집은 11월 기본표상 월~금 09:00~16:00, 마지막 입장 15:20이며 토·일·공휴일 휴관이에요. MA-10 주변에서는 보행로를 따라 걸어요.","stops":[{"name":"데이아 시청 앞","query":"Ajuntament de Deià, Carrer Porxo 4, Deià, Mallorca","tip":"출발"},{"name":"Es Clot 골목","query":"Museu Arqueològic de Deià, Carrer des Teix 4, Deià, Mallorca","tip":"박물관 주변 골목 · 외관 기준"},{"name":"교회·묘지 전망","query":"Església de Sant Joan Baptista, Deià, Mallorca","tip":"그레이브스의 무덤은 교회 옆 묘지"},{"name":"그레이브스의 집","query":"La Casa de Robert Graves, Deià, Mallorca","tip":"문학관·정원 · 평일 운영 확인"},{"name":"시청 앞 복귀","query":"Ajuntament de Deià, Carrer Porxo 4, Deià, Mallorca","tip":"도착"}],"embedUrl":"https://www.google.com/maps/embed?origin=mfe&pb=!1m12!4m11!3e2!4m1!2sAjuntament+de+Dei%C3%A0,+Carrer+Porxo+4,+Dei%C3%A0,+Mallorca!4m1!2sMuseu+Arqueol%C3%B2gic+de+Dei%C3%A0,+Carrer+des+Teix+4,+Dei%C3%A0,+Mallorca!4m1!2sEsgl%C3%A9sia+de+Sant+Joan+Baptista,+Dei%C3%A0,+Mallorca!4m1!2sLa+Casa+de+Robert+Graves,+Dei%C3%A0,+Mallorca!4m1!2sAjuntament+de+Dei%C3%A0,+Carrer+Porxo+4,+Dei%C3%A0,+Mallorca!3m1!1sko!5m1!1sko","mapsUrl":"https://www.google.com/maps/dir/?api=1&origin=Ajuntament+de+Dei%C3%A0%2C+Carrer+Porxo+4%2C+Dei%C3%A0%2C+Mallorca&destination=Ajuntament+de+Dei%C3%A0%2C+Carrer+Porxo+4%2C+Dei%C3%A0%2C+Mallorca&travelmode=walking&waypoints=Museu+Arqueol%C3%B2gic+de+Dei%C3%A0%2C+Carrer+des+Teix+4%2C+Dei%C3%A0%2C+Mallorca%7CEsgl%C3%A9sia+de+Sant+Joan+Baptista%2C+Dei%C3%A0%2C+Mallorca%7CLa+Casa+de+Robert+Graves%2C+Dei%C3%A0%2C+Mallorca"},{"id":"cove","label":"C · Cala Deià","mode":"walking","title":"마을에서 해안으로 내려가는 도보 경로","duration":"왕복·휴식 포함 2~2.5시간 가정","summary":"지도에는 해안까지 내려가는 편도 경로가 표시돼요. 돌아올 때는 ‘마을로 돌아오기’를 눌러 오르막 복귀 경로를 확인해요.","note":"마을 산책과 별도로 선택하는 코스예요. 비·강풍·높은 파도에는 생략하고, 밝을 때 돌아올 시간을 확보해요. 해안 식당 영업은 확인이 필요해요.","returnLabel":"마을로 돌아오기 · 도보","stops":[{"name":"데이아 시청 앞","query":"Ajuntament de Deià, Carrer Porxo 4, Deià, Mallorca","tip":"출발 · 물과 겉옷 준비"},{"name":"Cala Deià","query":"Cala Deià, Mallorca","tip":"바위·자갈 해안 · 귀환은 오르막"}],"embedUrl":"https://www.google.com/maps/embed?origin=mfe&pb=!1m6!4m5!3e2!4m1!2sAjuntament+de+Dei%C3%A0,+Carrer+Porxo+4,+Dei%C3%A0,+Mallorca!4m1!2sCala+Dei%C3%A0,+Mallorca!3m1!1sko!5m1!1sko","mapsUrl":"https://www.google.com/maps/dir/?api=1&origin=Ajuntament+de+Dei%C3%A0%2C+Carrer+Porxo+4%2C+Dei%C3%A0%2C+Mallorca&destination=Cala+Dei%C3%A0%2C+Mallorca&travelmode=walking","returnUrl":"https://www.google.com/maps/dir/?api=1&origin=Cala+Dei%C3%A0%2C+Mallorca&destination=Ajuntament+de+Dei%C3%A0%2C+Carrer+Porxo+4%2C+Dei%C3%A0%2C+Mallorca&travelmode=walking"},{"id":"son-marroig","label":"D · 손 마로이그","mode":"driving","title":"발데모사 방향의 저택·전망대","duration":"이동·주차·관람 60~90분 가정","summary":"마을 중심에서 손 마로이그까지 차량으로 이동하는 별도 코스예요. 지도는 저택 박물관까지 연결하며 Sa Foradada 반도 하이킹은 포함하지 않아요.","note":"시청 앞은 위치 기준점이에요. 실제 차량 출발지는 주차한 곳으로 바꾸고, 마을 골목 진입 제한을 확인해요. 박물관 16:30 마감과 외부 전망대·주차 접근은 따로 확인하세요.","returnLabel":"데이아로 돌아오기 · 차량","stops":[{"name":"데이아 마을 중심","query":"Ajuntament de Deià, Carrer Porxo 4, Deià, Mallorca","tip":"위치 기준 · 실제 차량 출발지는 주차 위치로 변경"},{"name":"Son Marroig","query":"Son Marroig, Deià, Mallorca","tip":"저택·정원·전망 · 주차와 개관 확인"}],"embedUrl":"https://www.google.com/maps/embed?origin=mfe&pb=!1m6!4m5!3e0!4m1!2sAjuntament+de+Dei%C3%A0,+Carrer+Porxo+4,+Dei%C3%A0,+Mallorca!4m1!2sSon+Marroig,+Dei%C3%A0,+Mallorca!3m1!1sko!5m1!1sko","mapsUrl":"https://www.google.com/maps/dir/?api=1&origin=Ajuntament+de+Dei%C3%A0%2C+Carrer+Porxo+4%2C+Dei%C3%A0%2C+Mallorca&destination=Son+Marroig%2C+Dei%C3%A0%2C+Mallorca&travelmode=driving","returnUrl":"https://www.google.com/maps/dir/?api=1&origin=Son+Marroig%2C+Dei%C3%A0%2C+Mallorca&destination=Ajuntament+de+Dei%C3%A0%2C+Carrer+Porxo+4%2C+Dei%C3%A0%2C+Mallorca&travelmode=driving"},{"id":"soller","label":"E · 소예르 방향","mode":"driving","title":"Llucalcari를 지나 소예르 쪽으로","duration":"데이아→소예르 이동 30~45분 가정 · 정차 별도","summary":"데이아 → Llucalcari → 소예르 방향의 위치 관계를 보는 선택 경로예요. Llucalcari는 합법적인 정차 공간이 있을 때만 들러요.","note":"마을 시청과 소예르 공영 주차장을 기준으로 연결해요. 호텔 주차·차량 허가를 뜻하지 않아요. 실제 출발 주차장과 도착 주차장, 도로 통제·주차 표지를 확인해요.","stops":[{"name":"데이아 마을 중심","query":"Ajuntament de Deià, Carrer Porxo 4, Deià, Mallorca","tip":"위치 기준 · 실제 출발지는 주차 위치로 변경"},{"name":"Llucalcari","query":"Llucalcari, Mallorca","tip":"선택 경유 · 주차 불가 시 정차 생략"},{"name":"소예르 주차 기준점","query":"Aparcament del Cementeri, Carrer de Pau Noguera 81, Sóller, Mallorca","tip":"공영 주차 위치 기준 · 현장 조건 확인"}],"embedUrl":"https://www.google.com/maps/embed?origin=mfe&pb=!1m8!4m7!3e0!4m1!2sAjuntament+de+Dei%C3%A0,+Carrer+Porxo+4,+Dei%C3%A0,+Mallorca!4m1!2sLlucalcari,+Mallorca!4m1!2sAparcament+del+Cementeri,+Carrer+de+Pau+Noguera+81,+S%C3%B3ller,+Mallorca!3m1!1sko!5m1!1sko","mapsUrl":"https://www.google.com/maps/dir/?api=1&origin=Ajuntament+de+Dei%C3%A0%2C+Carrer+Porxo+4%2C+Dei%C3%A0%2C+Mallorca&destination=Aparcament+del+Cementeri%2C+Carrer+de+Pau+Noguera+81%2C+S%C3%B3ller%2C+Mallorca&travelmode=driving&waypoints=Llucalcari%2C+Mallorca"}]}</script>
+  <script>(()=>{
+  'use strict';
+  const $=id=>document.getElementById(id);
+  const data=JSON.parse($('deia-routes-data').textContent);
+  const buttons=[...document.querySelectorAll('[data-deia-route]')];
+  const frame=$('deia-route-map');
+  const escape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  let selected=data.routes[0],mapVisible=false;
+  const canShow=()=>!$('app').hidden&&!$('deia-panel').hidden;
+
+  function loadMap(){
+    if(!canShow()||!mapVisible)return;
+    if(frame.getAttribute('src')===selected.embedUrl)return;
+    $('deia-map-status').textContent='Google 지도를 불러오고 있어요…';
+    frame.title=selected.label+' · Google 지도 경로';
+    frame.src=selected.embedUrl;
+    $('deia-map-placeholder').hidden=true;
+  }
+
+  function render(route){
+    selected=route;
+    buttons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.deiaRoute===route.id)));
+    $('deia-route-title').textContent=route.title;
+    $('deia-route-mode').textContent=(route.mode==='walking'?'도보':'차량')+' · '+route.duration;
+    $('deia-route-summary').textContent=route.summary;
+    $('deia-route-note').textContent=route.note;
+    $('deia-route-stops').innerHTML=route.stops.map((stop,index)=>`<li><span class="deia-stop-number" aria-hidden="true">${index+1}</span><div><strong>${escape(stop.name)}</strong><small>${escape(stop.tip)}</small><a href="https://www.google.com/maps/search/?api=1&amp;query=${encodeURIComponent(stop.query)}" target="_blank" rel="noopener noreferrer">위치 보기 ↗</a></div></li>`).join('');
+    $('deia-route-open').href=route.mapsUrl;
+    $('deia-route-open').textContent='Google 지도에서 경로 열기 ↗';
+    $('deia-route-return').hidden=!route.returnUrl;
+    if(route.returnUrl){$('deia-route-return').href=route.returnUrl;$('deia-route-return').textContent=route.returnLabel+' ↗'}
+    loadMap();
+  }
+
+  buttons.forEach(button=>button.addEventListener('click',()=>{
+    const route=data.routes.find(item=>item.id===button.dataset.deiaRoute);
+    if(!route)return;
+    mapVisible=true;render(route);
+  }));
+  frame.addEventListener('load',()=>{
+    if(frame.getAttribute('src'))$('deia-map-status').textContent='지도 안에서 확대·축소해 위치를 확인하세요.';
+  });
+  frame.addEventListener('error',()=>{$('deia-map-status').textContent='지도를 불러오지 못했어요. 아래 버튼으로 Google 지도를 열어주세요.'});
+
+  // 비밀번호를 해제하고 가이드 지도가 화면에 들어올 때만 외부 지도를 요청해요.
+  if('IntersectionObserver' in window){
+    const observer=new IntersectionObserver(entries=>{
+      mapVisible=entries.some(entry=>entry.isIntersecting);
+      loadMap();
+    },{rootMargin:'180px'});
+    observer.observe($('deia-route-view'));
+  }
+  const visibility=new MutationObserver(()=>{
+    if(!canShow()){
+      frame.removeAttribute('src');
+      $('deia-map-placeholder').hidden=false;
+      $('deia-map-status').textContent='지도는 인터넷에 연결되어 있을 때 표시돼요.';
+      return;
+    }
+    if(!('IntersectionObserver' in window))mapVisible=true;
+    loadMap();
+  });
+  visibility.observe($('app'),{attributes:true,attributeFilter:['hidden']});
+  visibility.observe($('deia-panel'),{attributes:true,attributeFilter:['hidden']});
+  render(selected);
+})();
+</script>
 </article>
+
 </section>
 <section id="phrasebook-panel" role="tabpanel" aria-labelledby="phrasebook-tab" tabindex="0" hidden>
   <div class="section-heading phrase-heading"><div><div class="eyebrow">A FEW WORDS GO A LONG WAY</div><h2>여행에서 통하는 한마디</h2><p>읽어도 좋고, 화면을 그대로 보여줘도 좋아요.</p></div><span class="badge">ES / PT</span></div>
